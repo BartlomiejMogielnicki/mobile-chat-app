@@ -4,6 +4,7 @@ import React, { FC } from "react";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import RoomScreen from "./src/screens/RoomScreen";
+import { colors } from "./src/theme/index";
 import { RootStackParamList } from "./src/types/index";
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -31,8 +32,30 @@ const App: FC = () => {
           name="Home"
           component={HomeScreen}
           initialParams={rooms}
+          options={{
+            title: "Chat rooms list",
+            headerStyle: {
+              backgroundColor: colors.primaryColor,
+            },
+            headerTitleStyle: {
+              paddingLeft: 40,
+              color: "#fff",
+            },
+          }}
         />
-        <Stack.Screen name="Room" component={RoomScreen} />
+        <Stack.Screen
+          name="Room"
+          component={RoomScreen}
+          options={{
+            title: "Chat room",
+            headerStyle: {
+              backgroundColor: colors.primaryColor,
+            },
+            headerTitleStyle: {
+              color: "#fff",
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
