@@ -6,9 +6,16 @@ import Header from "../components/Header";
 import RoomListItem from "../components/RoomListItem";
 import { HomeScreenProps } from "../types/index";
 
-const HomeScreen: FC<HomeScreenProps> = ({ route }) => {
+const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const rooms = Object.values(route.params);
-  console.log(rooms);
+
+  const handleItemPress = (id: string, name: string) => {
+    navigation.navigate("Room", {
+      id,
+      name,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Header text="Pick a room" />
@@ -21,6 +28,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ route }) => {
                 id={item.id}
                 name={item.name}
                 roomPic={item.roomPic}
+                onPress={handleItemPress}
               />
             )}
           />

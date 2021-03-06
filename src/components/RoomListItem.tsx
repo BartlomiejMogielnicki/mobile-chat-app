@@ -4,10 +4,17 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import { colors } from "../theme/index";
 import { RoomListItemProps } from "../types/index";
 
-const RoomListItem: FC<RoomListItemProps> = ({ id, name, roomPic }) => {
-  console.log(id, name, roomPic);
+const RoomListItem: FC<RoomListItemProps> = ({
+  id,
+  name,
+  roomPic,
+  onPress,
+}) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={() => console.log(id)}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => onPress(id, name)}
+    >
       <Text style={styles.text}>{name}</Text>
       {roomPic ? (
         <Image

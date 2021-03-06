@@ -29,11 +29,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     color: "#fff",
+    textAlign: "center",
   },
   titleContainer: {
-    marginTop: 30,
+    paddingBottom: 50,
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
 });
 

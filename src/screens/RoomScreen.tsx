@@ -3,11 +3,14 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Body from "../components/Body";
 import Header from "../components/Header";
+import { RoomScreenProps } from "../types/index";
 
-const RoomScreen: FC = () => {
+const RoomScreen: FC<RoomScreenProps> = ({ navigation, route }) => {
+  const { id, name } = route.params;
+
   return (
     <View style={styles.container}>
-      <Header text="Room name" />
+      <Header text={name} />
       <Body>
         <Text>RoomScreen</Text>
       </Body>

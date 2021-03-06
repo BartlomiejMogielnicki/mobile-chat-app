@@ -3,7 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 export type RootStackParamList = {
   Home: { id: string; name: string; roomPic: string }[];
-  Room: undefined;
+  Room: { id: string; name: string };
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
@@ -19,4 +19,14 @@ export type RoomListItemProps = {
   id: string;
   name: string;
   roomPic: string;
+  onPress: (id: string, name: string) => void;
+};
+
+type RoomScreenNavigationProp = StackNavigationProp<RootStackParamList, "Room">;
+
+type RoomScreenRouteProp = RouteProp<RootStackParamList, "Room">;
+
+export type RoomScreenProps = {
+  navigation: RoomScreenNavigationProp;
+  route: RoomScreenRouteProp;
 };
