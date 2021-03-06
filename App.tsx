@@ -23,7 +23,6 @@ const rooms = [
     name: "The one with some links for Chandler",
   },
 ];
-
 const App: FC = () => {
   return (
     <NavigationContainer>
@@ -39,7 +38,7 @@ const App: FC = () => {
             },
             headerTitleStyle: {
               paddingLeft: 40,
-              color: "#fff",
+              fontSize: 16,
             },
           }}
         />
@@ -52,7 +51,7 @@ const App: FC = () => {
               backgroundColor: colors.primaryColor,
             },
             headerTitleStyle: {
-              color: "#fff",
+              fontSize: 16,
             },
           }}
         />
