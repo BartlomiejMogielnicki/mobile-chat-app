@@ -2,7 +2,7 @@ import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export type RootStackParamList = {
-  Home: { id: string; name: string }[];
+  Home: { id: string; name: string; roomPic: string }[];
   Room: undefined;
 };
 
@@ -18,4 +18,5 @@ export type HomeScreenProps = {
 export type RoomListItemProps = {
   id: string;
   name: string;
+  roomPic: string;
 };

@@ -8,6 +8,7 @@ import { HomeScreenProps } from "../types/index";
 
 const HomeScreen: FC<HomeScreenProps> = ({ route }) => {
   const rooms = Object.values(route.params);
+  console.log(rooms);
   return (
     <View style={styles.container}>
       <Header text="Pick a room" />
@@ -16,7 +17,11 @@ const HomeScreen: FC<HomeScreenProps> = ({ route }) => {
           <FlatList
             data={rooms}
             renderItem={({ item }) => (
-              <RoomListItem id={item.id} name={item.name} />
+              <RoomListItem
+                id={item.id}
+                name={item.name}
+                roomPic={item.roomPic}
+              />
             )}
           />
         </View>
