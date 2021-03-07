@@ -18,3 +18,17 @@ export const GET_ROOMS = gql`
     }
   }
 `;
+
+export const GET_MESSAGES = gql`
+  query($id: String) {
+    room(id: $id) {
+      messages {
+        body
+        insertedAt
+        user {
+          id
+        }
+      }
+    }
+  }
+`;
