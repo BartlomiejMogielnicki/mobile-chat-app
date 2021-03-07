@@ -1,13 +1,16 @@
+import { useQuery } from "@apollo/client";
 import React, { FC } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import Body from "../components/Body";
 import Header from "../components/Header";
 import RoomListItem from "../components/RoomListItem";
+import { GET_ROOMS } from "../queries";
 import { HomeScreenProps } from "../types/index";
 
-const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
-  const rooms = Object.values(route.params);
+const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+  const { loading, error, data } = useQuery(GET_ROOMS);
+  const rooms = data.usersRooms.rooms;
 
   const handleItemPress = (id: string, name: string) => {
     navigation.navigate("Room", {
@@ -21,17 +24,19 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
       <Header text="Pick a room" />
       <Body>
         <View style={styles.listContainer}>
-          <FlatList
-            data={rooms}
-            renderItem={({ item }) => (
-              <RoomListItem
-                id={item.id}
-                name={item.name}
-                roomPic={item.roomPic}
-                onPress={handleItemPress}
-              />
-            )}
-          />
+          {data && (
+            <FlatList
+              data={rooms}
+              renderItem={({ item }) => (
+                <RoomListItem
+                  id={item.id}
+                  name={item.name}
+                  roomPic={item.roomPic}
+                  onPress={handleItemPress}
+                />
+              )}
+            />
+          )}
         </View>
       </Body>
     </View>

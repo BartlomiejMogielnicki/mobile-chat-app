@@ -8,11 +8,8 @@ export type RootStackParamList = {
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
-type HomeScreenRouteProp = RouteProp<RootStackParamList, "Home">;
-
 export type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
-  route: HomeScreenRouteProp;
 };
 
 export type RoomListItemProps = {
