@@ -9,6 +9,7 @@ const initialState = {
     lastName: "",
     role: "",
     email: "",
+    profilePic: "",
   },
   handleSetUser: (user: User) => {},
 };

@@ -2,6 +2,7 @@ import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export type RootStackParamList = {
+  Login: undefined;
   Home: undefined;
   Room: { id: string; name: string };
 };
@@ -47,4 +48,5 @@ export type User = {
   lastName: string;
   role: string;
   email: string;
+  profilePic: string;
 };
