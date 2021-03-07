@@ -3,11 +3,16 @@ import React, { FC } from "react";
 import { Button, TextInput, View, Text, StyleSheet } from "react-native";
 
 import { colors } from "../theme/index";
+import { LoginFormProps } from "../types/index";
 
-const Form: FC = (props) => (
+const Form: FC<LoginFormProps> = ({ handleLogin }) => (
   <Formik
     initialValues={{ email: "", password: "" }}
-    onSubmit={(values) => console.log(values)}
+    onSubmit={({ email, password }) => {
+      if (email || password) {
+        handleLogin(email, password);
+      }
+    }}
   >
     {({ handleChange, handleBlur, handleSubmit, values }) => (
       <View style={styles.container}>
@@ -18,6 +23,7 @@ const Form: FC = (props) => (
             onBlur={handleBlur("email")}
             value={values.email}
             style={styles.input}
+            placeholder="Please enter e-mail"
           />
         </View>
         <View style={styles.section}>
@@ -27,6 +33,8 @@ const Form: FC = (props) => (
             onBlur={handleBlur("password")}
             value={values.password}
             style={styles.input}
+            placeholder="Please enter password"
+            secureTextEntry
           />
         </View>
         <Button onPress={handleSubmit} title="Submit" />

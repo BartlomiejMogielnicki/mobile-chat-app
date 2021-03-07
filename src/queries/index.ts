@@ -66,6 +66,24 @@ export const MESSAGES_SUBSCRIPTION = gql`
         id
         lastName
         profilePic
+        role
+        email
+      }
+    }
+  }
+`;
+
+export const LOG_IN = gql`
+  mutation($email: String, $password: String) {
+    loginUser(email: $email, password: $password) {
+      token
+      user {
+        email
+        firstName
+        id
+        profilePic
+        role
+        lastName
       }
     }
   }

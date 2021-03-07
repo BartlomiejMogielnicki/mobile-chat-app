@@ -37,12 +37,11 @@ const App: FC = () => {
               name="Home"
               component={HomeScreen}
               options={{
-                title: "Chat rooms list",
+                title: "Log out",
                 headerStyle: {
                   backgroundColor: colors.primaryColor,
                 },
                 headerTitleStyle: {
-                  paddingLeft: 40,
                   fontSize: 16,
                 },
               }}

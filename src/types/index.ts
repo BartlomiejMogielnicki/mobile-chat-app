@@ -13,6 +13,15 @@ export type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 
+type LoginScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Login"
+>;
+
+export type LoginScreenProps = {
+  navigation: LoginScreenNavigationProp;
+};
+
 export type RoomListItemProps = {
   id: string;
   name: string;
@@ -49,4 +58,8 @@ export type User = {
   role: string;
   email: string;
   profilePic: string;
+};
+
+export type LoginFormProps = {
+  handleLogin: (email: string, password: string) => void;
 };
