@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 
 import { colors } from "../theme/index";
 import { RoomListItemProps } from "../types/index";
@@ -15,7 +15,6 @@ const RoomListItem: FC<RoomListItemProps> = ({
       style={styles.container}
       onPress={() => onPress(id, name)}
     >
-      <Text style={styles.text}>{name}</Text>
       {roomPic ? (
         <Image
           style={styles.roomLogo}
@@ -23,9 +22,8 @@ const RoomListItem: FC<RoomListItemProps> = ({
             uri: roomPic,
           }}
         />
-      ) : (
-        <View style={styles.unknownLogo} />
-      )}
+      ) : null}
+      <Text style={styles.text}>{name}</Text>
     </TouchableOpacity>
   );
 };
@@ -41,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: colors.primaryColor,
     borderRadius: 50,
-    borderWidth: 2,
+    borderWidth: 1,
   },
   roomLogo: {
     width: 75,
@@ -52,6 +50,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexShrink: 1,
     textAlign: "center",
+    fontWeight: "bold",
     color: "#000",
   },
   unknownLogo: {

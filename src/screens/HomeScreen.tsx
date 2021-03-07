@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { FC, useContext, useEffect } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Text } from "react-native";
 
 import Body from "../components/Body";
 import Header from "../components/Header";
@@ -32,6 +32,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       <Header text="Pick a room" />
       <Body>
         <View style={styles.listContainer}>
+          {loading && <Text>Loading...</Text>}
           {data && (
             <FlatList
               data={data.usersRooms.rooms}
@@ -45,6 +46,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               )}
             />
           )}
+          {error && <Text>Ooops... something went wrong</Text>}
         </View>
       </Body>
     </View>

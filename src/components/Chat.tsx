@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@apollo/client";
 import React, { FC, useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 
 import { UserContext } from "../context/UserContext";
@@ -36,14 +36,24 @@ const Chat: FC<ChatProps> = ({ id }) => {
 
   return (
     <View style={styles.container}>
+      {loading && (
+        <View style={styles.statusContainer}>
+          <Text>Loading...</Text>
+        </View>
+      )}
       {data && (
         <GiftedChat
           messages={messages.reverse()}
           onSend={(msg) => handleSendMessage(msg[0].text)}
           user={{
-            _id: JSON.stringify(user.id),
+            _id: user.id,
           }}
         />
+      )}
+      {error && (
+        <View style={styles.statusContainer}>
+          <Text>Ooops... something went wrong</Text>
+        </View>
       )}
     </View>
   );
@@ -52,7 +62,13 @@ const Chat: FC<ChatProps> = ({ id }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
+    paddingTop: 5,
+    width: "90%",
+  },
+  statusContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
