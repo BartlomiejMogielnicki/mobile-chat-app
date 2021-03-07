@@ -10,7 +10,6 @@ import { HomeScreenProps } from "../types/index";
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const { loading, error, data } = useQuery(GET_ROOMS);
-  const rooms = data.usersRooms.rooms;
 
   const handleItemPress = (id: string, name: string) => {
     navigation.navigate("Room", {
@@ -26,7 +25,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         <View style={styles.listContainer}>
           {data && (
             <FlatList
-              data={rooms}
+              data={data.usersRooms.rooms}
               renderItem={({ item }) => (
                 <RoomListItem
                   id={item.id}

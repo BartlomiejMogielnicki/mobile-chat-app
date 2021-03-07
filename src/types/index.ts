@@ -2,7 +2,7 @@ import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export type RootStackParamList = {
-  Home: { id: string; name: string; roomPic: string }[];
+  Home: undefined;
   Room: { id: string; name: string };
 };
 
@@ -19,11 +19,24 @@ export type RoomListItemProps = {
   onPress: (id: string, name: string) => void;
 };
 
-type RoomScreenNavigationProp = StackNavigationProp<RootStackParamList, "Room">;
-
 type RoomScreenRouteProp = RouteProp<RootStackParamList, "Room">;
 
 export type RoomScreenProps = {
-  navigation: RoomScreenNavigationProp;
   route: RoomScreenRouteProp;
+};
+
+export type ChatProps = {
+  id: string;
+};
+
+export type Message = {
+  id: string;
+  body: string;
+  insertedAt: string;
+  user: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    profilePic: string;
+  };
 };

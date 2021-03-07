@@ -23,10 +23,14 @@ export const GET_MESSAGES = gql`
   query($id: String) {
     room(id: $id) {
       messages {
+        id
         body
         insertedAt
         user {
           id
+          firstName
+          lastName
+          profilePic
         }
       }
     }
