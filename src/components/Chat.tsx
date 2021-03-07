@@ -1,18 +1,41 @@
 import { useQuery, useMutation } from "@apollo/client";
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 
 import { UserContext } from "../context/UserContext";
-import { GET_MESSAGES, SEND_MESSAGE } from "../queries";
+import { GET_MESSAGES, SEND_MESSAGE, MESSAGES_SUBSCRIPTION } from "../queries";
 import { ChatProps, Message } from "../types/index";
 
 const Chat: FC<ChatProps> = ({ id }) => {
   const { user } = useContext(UserContext);
   const [sendMessage] = useMutation(SEND_MESSAGE);
-  const { loading, error, data } = useQuery(GET_MESSAGES, {
+  const { loading, error, data, subscribeToMore } = useQuery(GET_MESSAGES, {
     variables: { id },
   });
+
+  const subscribeToNewMessages = () => {
+    subscribeToMore({
+      document: MESSAGES_SUBSCRIPTION,
+      variables: { id },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const newFeedItem = subscriptionData.data.messageAdded;
+        console.log(newFeedItem);
+        return Object.assign({}, prev, {
+          room: {
+            messages: [...prev.room.messages, newFeedItem],
+          },
+        });
+      },
+    });
+  };
+
+  useEffect(() => {
+    subscribeToNewMessages();
+  }, []);
+
+  // Format data for gifted-chat
   const messages = data
     ? data.room.messages.map((item: Message) => {
         return {
