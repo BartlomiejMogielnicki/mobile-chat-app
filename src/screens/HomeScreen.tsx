@@ -1,15 +1,24 @@
 import { useQuery } from "@apollo/client";
-import React, { FC } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import Body from "../components/Body";
 import Header from "../components/Header";
 import RoomListItem from "../components/RoomListItem";
+import { UserContext } from "../context/UserContext";
 import { GET_ROOMS } from "../queries";
 import { HomeScreenProps } from "../types/index";
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+  const { handleSetUser } = useContext(UserContext);
+
   const { loading, error, data } = useQuery(GET_ROOMS);
+
+  useEffect(() => {
+    if (data) {
+      handleSetUser(data.usersRooms.user);
+    }
+  }, [data]);
 
   const handleItemPress = (id: string, name: string) => {
     navigation.navigate("Room", {

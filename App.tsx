@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { FC } from "react";
 
+import UserProvider from "./src/context/UserContext";
 import HomeScreen from "./src/screens/HomeScreen";
 import RoomScreen from "./src/screens/RoomScreen";
 import { colors } from "./src/theme/index";
@@ -40,39 +41,41 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const App: FC = () => {
   return (
-    <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              title: "Chat rooms list",
-              headerStyle: {
-                backgroundColor: colors.primaryColor,
-              },
-              headerTitleStyle: {
-                paddingLeft: 40,
-                fontSize: 16,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Room"
-            component={RoomScreen}
-            options={{
-              title: "Chat room",
-              headerStyle: {
-                backgroundColor: colors.primaryColor,
-              },
-              headerTitleStyle: {
-                fontSize: 16,
-              },
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ApolloProvider>
+    <UserProvider>
+      <ApolloProvider client={client}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                title: "Chat rooms list",
+                headerStyle: {
+                  backgroundColor: colors.primaryColor,
+                },
+                headerTitleStyle: {
+                  paddingLeft: 40,
+                  fontSize: 16,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Room"
+              component={RoomScreen}
+              options={{
+                title: "Chat room",
+                headerStyle: {
+                  backgroundColor: colors.primaryColor,
+                },
+                headerTitleStyle: {
+                  fontSize: 16,
+                },
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ApolloProvider>
+    </UserProvider>
   );
 };
 

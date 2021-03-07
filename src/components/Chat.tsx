@@ -1,12 +1,14 @@
 import { useQuery } from "@apollo/client";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 
+import { UserContext } from "../context/UserContext";
 import { GET_MESSAGES } from "../queries";
 import { ChatProps, Message } from "../types/index";
 
 const Chat: FC<ChatProps> = ({ id }) => {
+  const { user } = useContext(UserContext);
   const { loading, error, data } = useQuery(GET_MESSAGES, {
     variables: { id },
   });
@@ -31,7 +33,7 @@ const Chat: FC<ChatProps> = ({ id }) => {
         <GiftedChat
           messages={messages.reverse()}
           user={{
-            _id: 1,
+            _id: JSON.stringify(user.id),
           }}
         />
       )}
