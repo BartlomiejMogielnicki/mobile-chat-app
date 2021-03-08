@@ -2,9 +2,8 @@ import { useQuery } from "@apollo/client";
 import React, { FC } from "react";
 import { StyleSheet, View, FlatList, Text } from "react-native";
 
-import Body from "../components/Body";
-import Header from "../components/Header";
 import RoomListItem from "../components/RoomListItem";
+import Layout from "../layout/Layout";
 import { GET_ROOMS } from "../queries";
 import { HomeScreenProps } from "../types/index";
 
@@ -20,8 +19,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header text="Pick a room" />
-      <Body>
+      <Layout text="Pick a room">
         <View style={styles.listContainer}>
           {loading && <Text>Loading...</Text>}
           {data && (
@@ -39,7 +37,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           )}
           {error && <Text>Ooops... something went wrong</Text>}
         </View>
-      </Body>
+      </Layout>
     </View>
   );
 };

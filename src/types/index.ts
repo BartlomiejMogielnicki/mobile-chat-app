@@ -60,6 +60,11 @@ export type User = {
   profilePic: string;
 };
 
+export type LayoutProps = {
+  text: string;
+  children: React.ReactNode;
+};
+
 export type LoginFormProps = {
   handleLogin: (email: string, password: string) => void;
 };
