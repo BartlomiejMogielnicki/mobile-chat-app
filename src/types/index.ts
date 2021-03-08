@@ -2,7 +2,7 @@ import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export type RootStackParamList = {
-  Login: undefined;
+  Login: { action?: string };
   Home: undefined;
   Room: { id: string; name: string };
 };
@@ -18,8 +18,11 @@ type LoginScreenNavigationProp = StackNavigationProp<
   "Login"
 >;
 
+type LoginScreenRouteProp = RouteProp<RootStackParamList, "Login">;
+
 export type LoginScreenProps = {
   navigation: LoginScreenNavigationProp;
+  route: LoginScreenRouteProp;
 };
 
 export type RoomListItemProps = {

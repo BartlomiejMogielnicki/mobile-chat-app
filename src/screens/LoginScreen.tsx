@@ -8,7 +8,7 @@ import Layout from "../layout/Layout";
 import { LOG_IN } from "../queries/index";
 import { LoginScreenProps } from "../types/index";
 
-const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
+const LoginScreen: FC<LoginScreenProps> = ({ navigation, route }) => {
   const { token, handleSetUser, handleSetToken } = useContext(UserContext);
   const [login, { data, loading, error }] = useMutation(LOG_IN);
 
@@ -18,18 +18,20 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
     });
   };
 
-  // Logout user if return from HomeScreen
+  // Handle user logout
   useEffect(() => {
-    handleSetUser({
-      id: "",
-      firstName: "",
-      lastName: "",
-      role: "",
-      email: "",
-      profilePic: "",
-    });
-    handleSetToken("");
-  }, []);
+    if (route.params && route.params.action === "logout") {
+      handleSetToken("");
+      handleSetUser({
+        id: "",
+        firstName: "",
+        lastName: "",
+        role: "",
+        email: "",
+        profilePic: "",
+      });
+    }
+  }, [route.params]);
 
   useEffect(() => {
     if (data) {

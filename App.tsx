@@ -2,6 +2,7 @@ import { ApolloProvider } from "@apollo/client";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { FC } from "react";
+import { Button } from "react-native";
 
 import { client } from "./src/apollo";
 import UserProvider from "./src/context/UserContext";
@@ -36,15 +37,26 @@ const App: FC = () => {
             <Stack.Screen
               name="Home"
               component={HomeScreen}
-              options={{
-                title: "Log out",
+              options={({ navigation }) => ({
+                title: "",
+                headerLeft: () => (
+                  <Button
+                    onPress={() => {
+                      navigation.navigate("Login", {
+                        action: "logout",
+                      });
+                    }}
+                    title="Log out"
+                    color={colors.primaryColor}
+                  />
+                ),
                 headerStyle: {
                   backgroundColor: colors.primaryColor,
                 },
                 headerTitleStyle: {
                   fontSize: 16,
                 },
-              }}
+              })}
             />
             <Stack.Screen
               name="Room"

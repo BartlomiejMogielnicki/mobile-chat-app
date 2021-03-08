@@ -13,8 +13,6 @@ const Header: FC<Props> = ({ text }) => {
     user: { profilePic },
   } = useContext(UserContext);
 
-  console.log(profilePic);
-
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
