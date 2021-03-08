@@ -26,7 +26,6 @@ const Chat: FC<ChatProps> = ({ id }) => {
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
         const newFeedItem = subscriptionData.data.messageAdded;
-        console.log(newFeedItem);
         return Object.assign({}, prev, {
           room: {
             messages: [...prev.room.messages, newFeedItem],

@@ -2,6 +2,12 @@ import { useMutation } from "@apollo/client";
 import React, { FC, useContext, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
+import { phoenixSocket } from "../apollo";
+import {
+  getTokenFromAsyncStorage,
+  saveTokenInAsyncStorage,
+  removeTokenFromAsyncStorage,
+} from "../asyncStorage";
 import Form from "../components/Form";
 import { UserContext } from "../context/UserContext";
 import Layout from "../layout/Layout";
@@ -18,6 +24,17 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation, route }) => {
     });
   };
 
+  const checkTokenStorage = async () => {
+    const token = await getTokenFromAsyncStorage();
+    if (token) {
+      handleSetToken(token);
+    }
+  };
+
+  useEffect(() => {
+    checkTokenStorage();
+  }, []);
+
   // Handle user logout
   useEffect(() => {
     if (route.params && route.params.action === "logout") {
@@ -31,12 +48,17 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation, route }) => {
         profilePic: "",
       });
     }
+
+    removeTokenFromAsyncStorage();
   }, [route.params]);
 
   useEffect(() => {
     if (data) {
       handleSetUser(data.loginUser.user);
       handleSetToken(data.loginUser.token);
+
+      saveTokenInAsyncStorage(data.loginUser.token);
+      phoenixSocket.disconnect();
     }
   }, [data]);
 
