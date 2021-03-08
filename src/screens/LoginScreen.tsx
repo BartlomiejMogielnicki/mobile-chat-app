@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { FC, useContext, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 import Body from "../components/Body";
 import Form from "../components/Form";
@@ -11,13 +11,26 @@ import { LoginScreenProps } from "../types/index";
 
 const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
   const { token, handleSetUser, handleSetToken } = useContext(UserContext);
-  const [login, { data }] = useMutation(LOG_IN);
+  const [login, { data, loading, error }] = useMutation(LOG_IN);
 
   const handleLogin = (email: string, password: string) => {
     login({
       variables: { email, password },
     });
   };
+
+  // Logout user if return from HomeScreen
+  useEffect(() => {
+    handleSetUser({
+      id: "",
+      firstName: "",
+      lastName: "",
+      role: "",
+      email: "",
+      profilePic: "",
+    });
+    handleSetToken("");
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -37,6 +50,8 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
       <Header text="Please Log In" />
       <Body>
         <Form handleLogin={handleLogin} />
+        {loading && <Text>Loading...</Text>}
+        {error && <Text>Ooops... something went wrong. Please try again.</Text>}
       </Body>
     </View>
   );

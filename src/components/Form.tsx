@@ -8,9 +8,10 @@ import { LoginFormProps } from "../types/index";
 const Form: FC<LoginFormProps> = ({ handleLogin }) => (
   <Formik
     initialValues={{ email: "", password: "" }}
-    onSubmit={({ email, password }) => {
+    onSubmit={({ email, password }, { resetForm }) => {
       if (email || password) {
         handleLogin(email, password);
+        resetForm({});
       }
     }}
   >
