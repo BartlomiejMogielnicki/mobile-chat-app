@@ -2,7 +2,6 @@ import * as AbsintheSocket from "@absinthe/socket";
 import { createAbsintheSocketLink } from "@absinthe/socket-apollo-link";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { API_TOKEN } from "@env";
 import { hasSubscription } from "@jumpn/utils-graphql";
 import { split } from "apollo-link";
 import { Socket as PhoenixSocket } from "phoenix";
@@ -14,12 +13,9 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = API_TOKEN;
-
   return {
     headers: {
       ...headers,
-      Authorization: `Bearer ${token}`,
     },
   };
 });
@@ -27,7 +23,13 @@ const authLink = setContext((_, { headers }) => {
 const authedHttpLink = authLink.concat(httpLink);
 
 const phoenixSocket = new PhoenixSocket(WS_URL, {
-  params: { token: API_TOKEN },
+  params: (token: string) => {
+    if (token) {
+      return { token };
+    } else {
+      return {};
+    }
+  },
 });
 
 const absintheSocket = AbsintheSocket.create(phoenixSocket);

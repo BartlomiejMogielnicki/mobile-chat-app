@@ -8,10 +8,15 @@ import { GET_MESSAGES, SEND_MESSAGE, MESSAGES_SUBSCRIPTION } from "../queries";
 import { ChatProps, Message } from "../types/index";
 
 const Chat: FC<ChatProps> = ({ id }) => {
-  const { user } = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
   const [sendMessage] = useMutation(SEND_MESSAGE);
   const { loading, error, data, subscribeToMore } = useQuery(GET_MESSAGES, {
     variables: { id },
+    context: {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
   });
 
   const subscribeToNewMessages = () => {
@@ -54,6 +59,11 @@ const Chat: FC<ChatProps> = ({ id }) => {
   const handleSendMessage = (text: string) => {
     sendMessage({
       variables: { body: text, roomId: id },
+      context: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     });
   };
 

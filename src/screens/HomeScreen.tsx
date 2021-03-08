@@ -1,14 +1,22 @@
 import { useQuery } from "@apollo/client";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { StyleSheet, View, FlatList, Text } from "react-native";
 
 import RoomListItem from "../components/RoomListItem";
+import { UserContext } from "../context/UserContext";
 import Layout from "../layout/Layout";
 import { GET_ROOMS } from "../queries";
 import { HomeScreenProps } from "../types/index";
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
-  const { loading, error, data } = useQuery(GET_ROOMS);
+  const { token } = useContext(UserContext);
+  const { loading, error, data } = useQuery(GET_ROOMS, {
+    context: {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  });
 
   const handleItemPress = (id: string, name: string) => {
     navigation.navigate("Room", {
