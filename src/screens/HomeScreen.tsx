@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import { StyleSheet, View, FlatList, Text } from "react-native";
 
 import RoomListItem from "../components/RoomListItem";
@@ -9,7 +9,7 @@ import { GET_ROOMS } from "../queries";
 import { HomeScreenProps } from "../types/index";
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
-  const { token } = useContext(UserContext);
+  const { token, handleSetUser } = useContext(UserContext);
   const { loading, error, data } = useQuery(GET_ROOMS, {
     context: {
       headers: {
@@ -17,6 +17,12 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       },
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      handleSetUser(data.usersRooms.user);
+    }
+  }, [data]);
 
   const handleItemPress = (id: string, name: string) => {
     navigation.navigate("Room", {
