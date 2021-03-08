@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 import React, { FC, useContext, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-import { phoenixSocket } from "../apollo";
 import {
   getTokenFromAsyncStorage,
   saveTokenInAsyncStorage,
@@ -58,7 +57,6 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation, route }) => {
       handleSetToken(data.loginUser.token);
 
       saveTokenInAsyncStorage(data.loginUser.token);
-      phoenixSocket.disconnect();
     }
   }, [data]);
 
