@@ -68,6 +68,10 @@ export type LayoutProps = {
   children: React.ReactNode;
 };
 
+export type HeaderProps = {
+  text: string;
+};
+
 export type LoginFormProps = {
   handleLogin: (email: string, password: string) => void;
 };

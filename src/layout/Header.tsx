@@ -3,12 +3,9 @@ import { View, StyleSheet, Text, Image } from "react-native";
 
 import { UserContext } from "../context/UserContext";
 import { colors } from "../theme/index";
+import { HeaderProps } from "../types";
 
-interface Props {
-  text: string;
-}
-
-const Header: FC<Props> = ({ text }) => {
+const Header: FC<HeaderProps> = ({ text }) => {
   const {
     user: { profilePic },
   } = useContext(UserContext);
