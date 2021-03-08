@@ -10,7 +10,7 @@ import { LOG_IN } from "../queries/index";
 import { LoginScreenProps } from "../types/index";
 
 const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
-  const { user, handleSetUser } = useContext(UserContext);
+  const { token, handleSetUser, handleSetToken } = useContext(UserContext);
   const [login, { data }] = useMutation(LOG_IN);
 
   const handleLogin = (email: string, password: string) => {
@@ -21,15 +21,16 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     if (data) {
-      handleSetUser(data.user);
+      handleSetUser(data.loginUser.user);
+      handleSetToken(data.loginUser.token);
     }
   }, [data]);
 
   useEffect(() => {
-    if (user.firstName) {
+    if (token) {
       navigation.navigate("Home");
     }
-  });
+  }, [token]);
 
   return (
     <View style={styles.container}>
