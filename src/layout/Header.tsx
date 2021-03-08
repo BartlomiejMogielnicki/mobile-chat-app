@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
   },
   title: {
     marginLeft: "auto",
-    fontSize: 24,
+    fontSize: 20,
     color: "#fff",
     textAlign: "center",
     flexShrink: 1,
   },
   titleCenter: {
     width: "100%",
-    fontSize: 24,
+    fontSize: 20,
     color: "#fff",
     textAlign: "center",
   },
