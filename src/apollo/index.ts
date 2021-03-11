@@ -13,16 +13,6 @@ const httpLink = createHttpLink({
   uri: URL,
 });
 
-const authLink = setContext((_, { headers }) => {
-  return {
-    headers: {
-      ...headers,
-    },
-  };
-});
-
-const authedHttpLink = authLink.concat(httpLink);
-
 export const phoenixSocket = new PhoenixSocket(WS_URL, {
   params: async () => {
     try {
@@ -43,7 +33,7 @@ const websocketLink = createAbsintheSocketLink(absintheSocket);
 const link = split(
   (operation) => hasSubscription(operation.query),
   websocketLink,
-  authedHttpLink
+  httpLink
 );
 
 const cache = new InMemoryCache();
