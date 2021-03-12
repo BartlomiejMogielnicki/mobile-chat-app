@@ -3,6 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 export type RootStackParamList = {
   Login: { action?: string };
+  Signup: undefined;
   Home: undefined;
   Room: { id: string; name: string };
 };
@@ -23,6 +24,18 @@ type LoginScreenRouteProp = RouteProp<RootStackParamList, "Login">;
 export type LoginScreenProps = {
   navigation: LoginScreenNavigationProp;
   route: LoginScreenRouteProp;
+};
+
+type SignupScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Signup"
+>;
+
+type SignupScreenRouteProp = RouteProp<RootStackParamList, "Signup">;
+
+export type SignupScreenProps = {
+  navigation: SignupScreenNavigationProp;
+  route: SignupScreenRouteProp;
 };
 
 export type RoomListItemProps = {

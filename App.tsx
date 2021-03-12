@@ -9,6 +9,7 @@ import UserProvider from "./src/context/UserContext";
 import HomeScreen from "./src/screens/HomeScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import RoomScreen from "./src/screens/RoomScreen";
+import SignupScreen from "./src/screens/SignupScreen";
 import { colors } from "./src/theme/index";
 import { RootStackParamList } from "./src/types/index";
 
@@ -19,10 +20,10 @@ const App: FC = () => {
     <UserProvider>
       <ApolloProvider client={client}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
-              name="Login"
-              component={LoginScreen}
+              name="Signup"
+              component={SignupScreen}
               options={{
                 title: "",
                 headerStyle: {
@@ -33,6 +34,31 @@ const App: FC = () => {
                   fontSize: 16,
                 },
               }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={({ navigation }) => ({
+                title: "",
+                headerLeft: () => (
+                  <Button
+                    onPress={() => {
+                      navigation.navigate("Signup", {
+                        action: "signup",
+                      });
+                    }}
+                    title="Sign up"
+                    color={colors.primaryColor}
+                  />
+                ),
+                headerStyle: {
+                  backgroundColor: colors.primaryColor,
+                },
+                headerTitleStyle: {
+                  paddingLeft: 40,
+                  fontSize: 16,
+                },
+              })}
             />
             <Stack.Screen
               name="Home"

@@ -1,7 +1,6 @@
 import * as AbsintheSocket from "@absinthe/socket";
 import { createAbsintheSocketLink } from "@absinthe/socket-apollo-link";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
 import { hasSubscription } from "@jumpn/utils-graphql";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { split } from "apollo-link";
