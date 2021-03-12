@@ -1,13 +1,14 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 
+import SignupForm from "../components/SignupForm";
 import Layout from "../layout/Layout";
 
 const SignupScreen: FC = () => {
   return (
     <View style={styles.container}>
       <Layout text="Sign Up">
-        <Text>SignupScreen</Text>
+        <SignupForm />
       </Layout>
     </View>
   );

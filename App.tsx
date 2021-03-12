@@ -25,12 +25,11 @@ const App: FC = () => {
               name="Signup"
               component={SignupScreen}
               options={{
-                title: "",
+                title: "return to log in",
                 headerStyle: {
                   backgroundColor: colors.primaryColor,
                 },
                 headerTitleStyle: {
-                  paddingLeft: 40,
                   fontSize: 16,
                 },
               }}
@@ -88,7 +87,7 @@ const App: FC = () => {
               name="Room"
               component={RoomScreen}
               options={{
-                title: "Chat room",
+                title: "return to rooms list",
                 headerStyle: {
                   backgroundColor: colors.primaryColor,
                 },

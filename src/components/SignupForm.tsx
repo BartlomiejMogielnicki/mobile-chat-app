@@ -3,14 +3,19 @@ import React, { FC } from "react";
 import { Button, TextInput, View, Text, StyleSheet } from "react-native";
 
 import { colors } from "../theme/index";
-import { LoginFormProps } from "../types/index";
 
-const Form: FC<LoginFormProps> = ({ handleLogin }) => (
+const SignupForm: FC = () => (
   <Formik
-    initialValues={{ email: "", password: "" }}
+    initialValues={{
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+      passwordConfirm: "",
+    }}
     onSubmit={({ email, password }, { resetForm }) => {
       if (email && password) {
-        handleLogin(email, password);
+        console.log("Signup");
         resetForm({});
       }
     }}
@@ -28,6 +33,28 @@ const Form: FC<LoginFormProps> = ({ handleLogin }) => (
           />
         </View>
         <View style={styles.section}>
+          <Text style={styles.text}>First name</Text>
+          <TextInput
+            onChangeText={handleChange("firstName")}
+            onBlur={handleBlur("firstName")}
+            value={values.firstName}
+            style={styles.input}
+            placeholder="Please enter first name"
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.text}>Last name</Text>
+          <TextInput
+            onChangeText={handleChange("lastName")}
+            onBlur={handleBlur("lastName")}
+            value={values.lastName}
+            style={styles.input}
+            placeholder="Please enter last name"
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.section}>
           <Text style={styles.text}>Password</Text>
           <TextInput
             onChangeText={handleChange("password")}
@@ -38,7 +65,18 @@ const Form: FC<LoginFormProps> = ({ handleLogin }) => (
             secureTextEntry
           />
         </View>
-        <Button onPress={handleSubmit} title="Submit" />
+        <View style={styles.section}>
+          <Text style={styles.text}>Confirm password</Text>
+          <TextInput
+            onChangeText={handleChange("passwordConfirm")}
+            onBlur={handleBlur("passwordConfirm")}
+            value={values.passwordConfirm}
+            style={styles.input}
+            placeholder="Please confirm password"
+            secureTextEntry
+          />
+        </View>
+        <Button onPress={() => handleSubmit} title="Submit" />
       </View>
     )}
   </Formik>
@@ -69,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form;
+export default SignupForm;
