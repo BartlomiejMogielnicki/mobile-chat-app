@@ -3,8 +3,9 @@ import React, { FC } from "react";
 import { Button, TextInput, View, Text, StyleSheet } from "react-native";
 
 import { colors } from "../theme/index";
+import { SignupFormProps } from "../types";
 
-const SignupForm: FC = () => (
+const SignupForm: FC<SignupFormProps> = ({ handleSignup }) => (
   <Formik
     initialValues={{
       email: "",
@@ -13,9 +14,12 @@ const SignupForm: FC = () => (
       password: "",
       passwordConfirm: "",
     }}
-    onSubmit={({ email, password }, { resetForm }) => {
-      if (email && password) {
-        console.log("Signup");
+    onSubmit={(
+      { email, firstName, lastName, password, passwordConfirm },
+      { resetForm }
+    ) => {
+      if (email && firstName && lastName && password && passwordConfirm) {
+        handleSignup(email, firstName, lastName, password, passwordConfirm);
         resetForm({});
       }
     }}

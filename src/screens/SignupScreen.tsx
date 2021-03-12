@@ -5,10 +5,20 @@ import SignupForm from "../components/SignupForm";
 import Layout from "../layout/Layout";
 
 const SignupScreen: FC = () => {
+  const handleSignup = (
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string,
+    passwordConfirm: string
+  ) => {
+    console.log(email, firstName, lastName, password, passwordConfirm);
+  };
+
   return (
     <View style={styles.container}>
       <Layout text="Sign Up">
-        <SignupForm />
+        <SignupForm handleSignup={handleSignup} />
       </Layout>
     </View>
   );

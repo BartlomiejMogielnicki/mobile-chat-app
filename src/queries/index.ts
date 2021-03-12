@@ -89,3 +89,28 @@ export const LOG_IN = gql`
     }
   }
 `;
+
+export const SIGN_UP = gql`
+  mutation(
+    $email: String
+    $firstName: String
+    $lastName: String
+    $password: String
+    $passwordConfirm: String
+  ) {
+    registerUser(
+      email: $email
+      firstName: $firstName
+      lastName: $lastName
+      password: $password
+      passwordConfirm: $passwordConfirm
+    ) {
+      id
+      email
+      firstName
+      lastName
+      role
+      profilePic
+    }
+  }
+`;

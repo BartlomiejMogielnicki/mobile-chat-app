@@ -88,3 +88,13 @@ export type HeaderProps = {
 export type LoginFormProps = {
   handleLogin: (email: string, password: string) => void;
 };
+
+export type SignupFormProps = {
+  handleSignup: (
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string,
+    passwordConfirm: string
+  ) => void;
+};
